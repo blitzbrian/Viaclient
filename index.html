@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta name="description" content="Play minecraft in your browser" />
+		<meta name="keywords" content="viaclient, minecraft, 1.8, 1.8.8, 1.5, 1.5.2" />
+		<title>Viaclient</title>
+		<meta property="og:locale" content="en-US" />
+		<meta property="og:type" content="website" />
+		<meta property="og:title" content="Viaclient" />
+		<meta property="og:description" content="Play minecraft in your browser" />
+		<meta property="og:image" content="favicon.png" />
+		<link type="image/png" rel="shortcut icon" href="favicon.png" />
+		<script type="text/javascript">
+			"use strict";
+			window.addEventListener("load", () => {
+				if(document.location.href.startsWith("file:")) {
+					window.location.href = "https://viaclient.netlify.app";
+				}
+			});
+
+			// dynamically load scripts for faster load times
+
+			function script(src) {
+				let script = document.createElement("script");
+				script.src = src;
+				document.body.appendChild(script);
+				return script;
+			}
+
+			// select pack
+			function pack() {
+				document.getElementById("pack").hidden = false;
+				document.getElementById("version").hidden = true;
+			}
+
+			// start minecraft 1.5.2
+			function start5(pack) {
+				script("1.5.2.js").addEventListener('load', function() {
+					window.minecraftOpts = [
+						"game_frame", pack,
+						btoa(atob("CgAACQAHc2VydmVycwoAAAABCAAKZm9yY2VkTU9URABtb3RkaGVyZQEAC2hpZGVBZGRyZXNzAQgAAmlwAGlwaGVyZQgABG5hbWUAbmFtZWhlcmUAAA==").replace("motdhere",String.fromCharCode(`Your Minecraft Server`.length)+`Your Minecraft Server`).replace("namehere",String.fromCharCode(`Template`.length)+`Template`).replace("iphere",String.fromCharCode(("ws"+location.protocol.slice(4)+"//"+location.host+"/server").length)+("ws"+location.protocol.slice(4)+"//"+location.host+"/server")))
+					];
+					document.getElementById("prelaunch")?.remove();
+					main();
+				});
+			}
+
+			// start minecraft 1.8.2
+			function start8() {
+				script("fix-webm-duration.js");
+				script("1.8.8.js").addEventListener('load', function() {;
+					window.eaglercraftXOpts = {
+						container: "game_frame",
+						lang: "en_US",
+  						assetsURI: "1.8.8.epk",
+						localesURI: "lang/"
+					};
+					document.getElementById("prelaunch")?.remove();
+					main();
+				});
+			}
+		</script>
+	</head>
+	<body style="margin:0px;width:100vw;height:100vh;overflow:hidden;" id="game_frame">
+		<div style="margin:0px;width:100%;height:100%;font-family:sans-serif;display:flex;align-items:center;user-select:none;" id="prelaunch">
+			<div style="margin:auto;text-align:center;" id="version">
+				<h1>Viaclient</h1>
+				<button style="padding: 12px 28px; font-size: 20px; background-color: white; color: black; border: 2px solid #555555; border-radius: 12px;" onclick="pack();">Launch 1.5.2</button>
+				<button style="padding: 12px 28px; font-size: 20px; background-color: white; color: black; border: 2px solid #555555; border-radius: 12px;" onclick="start8();">Launch 1.8.8</button>
+			</div>
+			<div style="margin:auto;text-align:center;" id="pack" hidden = true>
+				<h2>Select a pack</h2>
+				<button style="padding: 12px 28px; font-size: 20px; background-color: white; color: black; border: 2px solid #555555; border-radius: 12px;" onclick="start5('1.5.2.epk');">Vanilla</button>
+				<button style="padding: 12px 28px; font-size: 20px; background-color: white; color: black; border: 2px solid #555555; border-radius: 12px;" onclick="start5('nebula.epk');">Nebula</button>
+				<button style="padding: 12px 28px; font-size: 20px; background-color: white; color: black; border: 2px solid #555555; border-radius: 12px;" onclick="start5('ricefault.epk');">Ricefault</button>
+			</div>
+		</div>
+	</body>
+</html>
