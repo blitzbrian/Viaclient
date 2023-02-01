@@ -29,13 +29,18 @@
 				return script;
 			}
 
-			function pack() {
-				document.getElementById("pack").hidden = false;
+			function pack5() {
+				document.getElementById("pack5").hidden = false;
+				document.getElementById("version").hidden = true;
+			}
+
+			function pack8() {
+				document.getElementById("pack8").hidden = false;
 				document.getElementById("version").hidden = true;
 			}
 
 			function start3() {
-				document.getElementById("prelaunch")?.remove();
+				document.getElementById("prelaunch").remove();
 				script("1.3.js").addEventListener('load', function() {
 					window.minecraftOpts = ["game_frame","1.3.epk"];
 					main();
@@ -44,11 +49,11 @@
 
 			// start minecraft 1.5.2
 			function start5(pack) {
-				document.getElementById("prelaunch")?.remove();
+				document.getElementById("prelaunch").remove();
 				window.pack = pack;
 				script("1.5.2.js").addEventListener('load', function() {
 					window.minecraftOpts = [
-						"game_frame", pack + '.epk',
+						"game_frame", "/1.5.2/" + pack + '.epk',
 						btoa(atob("CgAACQAHc2VydmVycwoAAAABCAAKZm9yY2VkTU9URABtb3RkaGVyZQEAC2hpZGVBZGRyZXNzAQgAAmlwAGlwaGVyZQgABG5hbWUAbmFtZWhlcmUAAA==").replace("motdhere",String.fromCharCode(`Your Minecraft Server`.length)+`Your Minecraft Server`).replace("namehere",String.fromCharCode(`Template`.length)+`Template`).replace("iphere",String.fromCharCode(("ws"+location.protocol.slice(4)+"//"+location.host+"/server").length)+("ws"+location.protocol.slice(4)+"//"+location.host+"/server")))
 					];
 					main();
@@ -56,14 +61,15 @@
 			}
 
 			// start minecraft 1.8.2
-			function start8() {
-				document.getElementById("prelaunch")?.remove();
+			function start8(pack) {
+				document.getElementById("prelaunch").remove();
+				window.pack = pack;
 				script("fix-webm-duration.js");
 				script("1.8.8.js").addEventListener('load', function() {;
 					window.eaglercraftXOpts = {
 						container: "game_frame",
 						lang: "en_US",
-  						assetsURI: "1.8.8.epk",
+  						assetsURI: "/1.8.8/" + pack + ".epk",
 						localesURI: "lang/"
 					};
 					main();
@@ -76,15 +82,22 @@
 			<div style="margin:auto;text-align:center;" id="version">
 				<h1>Viaclient</h1>
 				<button style="padding: 12px 28px; font-size: 20px; background-color: white; color: black; border: 2px solid #555555; border-radius: 12px;" onclick="start3();">Launch 1.3</button>
-				<button style="padding: 12px 28px; font-size: 20px; background-color: white; color: black; border: 2px solid #555555; border-radius: 12px;" onclick="pack();">Launch 1.5.2</button>
-				<button style="padding: 12px 28px; font-size: 20px; background-color: white; color: black; border: 2px solid #555555; border-radius: 12px;" onclick="start8();">Launch 1.8.8</button>
+				<button style="padding: 12px 28px; font-size: 20px; background-color: white; color: black; border: 2px solid #555555; border-radius: 12px;" onclick="pack5();">Launch 1.5.2</button>
+				<button style="padding: 12px 28px; font-size: 20px; background-color: white; color: black; border: 2px solid #555555; border-radius: 12px;" onclick="pack8();">Launch 1.8.8</button>
 			</div>
-			<div style="margin:auto;text-align:center;" id="pack" hidden = true>
+			<div style="margin:auto;text-align:center;" id="pack5" hidden = true>
 				<h2>Select a pack</h2>
 				<button style="padding: 12px 28px; font-size: 20px; background-color: white; color: black; border: 2px solid #555555; border-radius: 12px;" onclick="start5('vanilla');">Vanilla</button>
 				<button style="padding: 12px 28px; font-size: 20px; background-color: white; color: black; border: 2px solid #555555; border-radius: 12px;" onclick="start5('nebula');">Nebula</button>
 				<button style="padding: 12px 28px; font-size: 20px; background-color: white; color: black; border: 2px solid #555555; border-radius: 12px;" onclick="start5('ricefault');">Ricefault</button>
 				<button style="padding: 12px 28px; font-size: 20px; background-color: white; color: black; border: 2px solid #555555; border-radius: 12px;" onclick="start5('bedlessfault');">Bedlessfault</button>
+			</div>
+			<div style="margin:auto;text-align:center;" id="pack8" hidden = true>
+				<h2>Select a pack</h2>
+				<button style="padding: 12px 28px; font-size: 20px; background-color: white; color: black; border: 2px solid #555555; border-radius: 12px;" onclick="start8('vanilla');">Vanilla</button>
+				<button style="padding: 12px 28px; font-size: 20px; background-color: white; color: black; border: 2px solid #555555; border-radius: 12px;" onclick="start8('nebula');">Nebula</button>
+				<button style="padding: 12px 28px; font-size: 20px; background-color: white; color: black; border: 2px solid #555555; border-radius: 12px;" onclick="start8('ricefault');">Ricefault</button>
+				<button style="padding: 12px 28px; font-size: 20px; background-color: white; color: black; border: 2px solid #555555; border-radius: 12px;" onclick="start8('bedlessfault');">Bedlessfault</button>
 			</div>
 		</div>
 	</body>
