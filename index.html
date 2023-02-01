@@ -16,20 +16,19 @@
 			"use strict";
 			window.addEventListener("load", () => {
 				if(document.location.href.startsWith("file:")) {
+					alert("Download all files and put it in a server!");
 					window.location.href = "https://viaclient.netlify.app";
 				}
 			});
 
 			// dynamically load scripts for faster load times
-
 			function script(src) {
 				let script = document.createElement("script");
 				script.src = src;
-				document.body.appendChild(script);
+				document.head.appendChild(script);
 				return script;
 			}
 
-			// select pack
 			function pack() {
 				document.getElementById("pack").hidden = false;
 				document.getElementById("version").hidden = true;
@@ -37,18 +36,19 @@
 
 			// start minecraft 1.5.2
 			function start5(pack) {
+				document.getElementById("prelaunch")?.remove();
 				script("1.5.2.js").addEventListener('load', function() {
 					window.minecraftOpts = [
 						"game_frame", pack,
 						btoa(atob("CgAACQAHc2VydmVycwoAAAABCAAKZm9yY2VkTU9URABtb3RkaGVyZQEAC2hpZGVBZGRyZXNzAQgAAmlwAGlwaGVyZQgABG5hbWUAbmFtZWhlcmUAAA==").replace("motdhere",String.fromCharCode(`Your Minecraft Server`.length)+`Your Minecraft Server`).replace("namehere",String.fromCharCode(`Template`.length)+`Template`).replace("iphere",String.fromCharCode(("ws"+location.protocol.slice(4)+"//"+location.host+"/server").length)+("ws"+location.protocol.slice(4)+"//"+location.host+"/server")))
 					];
-					document.getElementById("prelaunch")?.remove();
 					main();
 				});
 			}
 
 			// start minecraft 1.8.2
 			function start8() {
+				document.getElementById("prelaunch")?.remove();
 				script("fix-webm-duration.js");
 				script("1.8.8.js").addEventListener('load', function() {;
 					window.eaglercraftXOpts = {
@@ -57,7 +57,6 @@
   						assetsURI: "1.8.8.epk",
 						localesURI: "lang/"
 					};
-					document.getElementById("prelaunch")?.remove();
 					main();
 				});
 			}
