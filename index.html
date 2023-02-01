@@ -37,9 +37,10 @@
 			// start minecraft 1.5.2
 			function start5(pack) {
 				document.getElementById("prelaunch")?.remove();
+				window.pack = pack;
 				script("1.5.2.js").addEventListener('load', function() {
 					window.minecraftOpts = [
-						"game_frame", pack,
+						"game_frame", pack + '.epk',
 						btoa(atob("CgAACQAHc2VydmVycwoAAAABCAAKZm9yY2VkTU9URABtb3RkaGVyZQEAC2hpZGVBZGRyZXNzAQgAAmlwAGlwaGVyZQgABG5hbWUAbmFtZWhlcmUAAA==").replace("motdhere",String.fromCharCode(`Your Minecraft Server`.length)+`Your Minecraft Server`).replace("namehere",String.fromCharCode(`Template`.length)+`Template`).replace("iphere",String.fromCharCode(("ws"+location.protocol.slice(4)+"//"+location.host+"/server").length)+("ws"+location.protocol.slice(4)+"//"+location.host+"/server")))
 					];
 					main();
@@ -71,10 +72,10 @@
 			</div>
 			<div style="margin:auto;text-align:center;" id="pack" hidden = true>
 				<h2>Select a pack</h2>
-				<button style="padding: 12px 28px; font-size: 20px; background-color: white; color: black; border: 2px solid #555555; border-radius: 12px;" onclick="start5('1.5.2.epk');">Vanilla</button>
-				<button style="padding: 12px 28px; font-size: 20px; background-color: white; color: black; border: 2px solid #555555; border-radius: 12px;" onclick="start5('nebula.epk');">Nebula</button>
-				<button style="padding: 12px 28px; font-size: 20px; background-color: white; color: black; border: 2px solid #555555; border-radius: 12px;" onclick="start5('ricefault.epk');">Ricefault</button>
-				<button style="padding: 12px 28px; font-size: 20px; background-color: white; color: black; border: 2px solid #555555; border-radius: 12px;" onclick="start5('bedlessfault.epk');">Bedlessfault</button>
+				<button style="padding: 12px 28px; font-size: 20px; background-color: white; color: black; border: 2px solid #555555; border-radius: 12px;" onclick="start5('vanilla');">Vanilla</button>
+				<button style="padding: 12px 28px; font-size: 20px; background-color: white; color: black; border: 2px solid #555555; border-radius: 12px;" onclick="start5('nebula');">Nebula</button>
+				<button style="padding: 12px 28px; font-size: 20px; background-color: white; color: black; border: 2px solid #555555; border-radius: 12px;" onclick="start5('ricefault');">Ricefault</button>
+				<button style="padding: 12px 28px; font-size: 20px; background-color: white; color: black; border: 2px solid #555555; border-radius: 12px;" onclick="start5('bedlessfault');">Bedlessfault</button>
 			</div>
 		</div>
 	</body>
