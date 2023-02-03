@@ -14,6 +14,9 @@
 		<link type="image/png" rel="shortcut icon" href="favicon.png" />
 		<script type="text/javascript">
 			"use strict";
+			//offline support
+			navigator.serviceWorker.register('/sw.js');
+
 			window.addEventListener("load", () => {
 				if(document.location.href.startsWith("file:")) {
 					alert("Download all files and put it in a server!");
